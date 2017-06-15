@@ -67,8 +67,13 @@ elseif type==3
     color = repmat(color,[1 2]);
     A2 = 4;
 elseif type==4
-    color = repmat([color(1,:) color(2,:); color(3,:)  color(4,:); ...
-       color(5,:) color(6,:); color(7,:)  color(8,:)],[2 1]);
+    if ~mod(size(color,2),2)
+        error('Wrong color matrix input')
+    else
+        color = repmat(reshape(color',6,[])',[2 1]);
+%         color = repmat([color(1,:) color(2,:); color(3,:)  color(4,:); ...
+%             color(5,:) color(6,:); color(7,:)  color(8,:)],[2 1]);
+    end
 end
 color = repmat(color,[ceil(size(data1,2)/size(color,1)) 1]);
 
